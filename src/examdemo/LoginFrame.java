@@ -5,6 +5,9 @@
  */
 package examdemo;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author roman
@@ -40,8 +43,18 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2.setText("Пароль:");
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Отмена");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,6 +97,39 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+        // ivanovii
+        // Qwerty1!
+        if(username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Поле имя пользователя не должно быть пустым", "Предупреждение", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Поле пароля не должно быть пустым", "Предупреждение", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        ArrayList<ArrayList<String>> result = Database.query("SELECT count(*) FROM users WHERE username = '" + username + "' and password = '" + password + "'");
+        
+        try {
+            if(Integer.parseInt(result.get(0).get(0)) == 0) {
+                JOptionPane.showMessageDialog(this, "Данная комбинация имя пользователя/пароль не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            } else {
+                System.out.println("Запись существует");
+            }
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_okButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -114,6 +160,7 @@ public class LoginFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                Database.connect();
                 new LoginFrame().setVisible(true);
             }
         });
