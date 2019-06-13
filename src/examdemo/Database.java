@@ -52,8 +52,12 @@ public class Database {
     }
     
     public static boolean execute(String sql) {
+        if(!connected)
+            throw new NullPointerException("No connection");
+        
         try {
-            return stmt.execute(sql);
+            stmt.execute(sql);
+            return true;
         } catch(Exception e) {
             System.out.println(e);
             return false;
@@ -61,6 +65,9 @@ public class Database {
     }
     
     public static ArrayList<ArrayList<String>> query(String sql) {
+        if(!connected)
+            throw new NullPointerException("No connection");
+        
         ArrayList<ArrayList<String>> returnValue = new ArrayList<>();
         
         try {

@@ -35,6 +35,7 @@ public class LoginFrame extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        registationButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,6 +57,13 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
+        registationButton.setText("Регистрация");
+        registationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registationButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,7 +80,9 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(okButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addComponent(registationButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton)))
                 .addContainerGap())
         );
@@ -90,7 +100,8 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(registationButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -129,6 +140,11 @@ public class LoginFrame extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void registationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registationButtonActionPerformed
+        RegistationDialog dialog = new RegistationDialog(this, true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_registationButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +188,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton okButton;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton registationButton;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
