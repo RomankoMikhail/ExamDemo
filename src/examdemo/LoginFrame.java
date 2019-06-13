@@ -118,32 +118,54 @@ public class LoginFrame extends javax.swing.JFrame {
         String password = passwordField.getText().trim();
         // ivanovii
         // Qwerty1!
-        if(username.isEmpty()) {
+        if (username.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Поле имя пользователя не должно быть пустым", "Предупреждение", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        if(password.isEmpty()) {
+
+        if (password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Поле пароля не должно быть пустым", "Предупреждение", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        ArrayList<ArrayList<String>> result = Database.query("SELECT count(*) FROM users WHERE username = '" + username + "' and password = '" + password + "'");
-        
+
+        ArrayList<ArrayList<String>> result = Database.query("SELECT type FROM users WHERE username = '" + username + "' and password = '" + password + "'");
+
         try {
-            if(Integer.parseInt(result.get(0).get(0)) == 0) {
+            if(result.size() == 0) {
                 JOptionPane.showMessageDialog(this, "Данная комбинация имя пользователя/пароль не существует", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            } else {
-                System.out.println("Запись существует");
+                return;
             }
-        } catch (Exception e) {
             
+            if(result.get(0).get(0).equals("Заказчик")) {
+                JOptionPane.showMessageDialog(this, "Пользователь не имеет права доступа к редактированию других пользователей", "Предупреждение", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+
+            setVisible(false);
+            dispose();
+           
+        } catch (Exception e) {
+
         }
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void registationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registationButtonActionPerformed
         RegistationDialog dialog = new RegistationDialog(this, true);
         dialog.setVisible(true);
+
+        String fullname = dialog.getFullname();
+        String password = dialog.getPassword();
+        String username = dialog.getUsername();
+        if (dialog.isReady()) {
+            if (!Database.execute("INSERT INTO users (fullname, username, password, type) VALUES('" + fullname + "', '" + username + "', '" + password + "', 1);")) {
+                JOptionPane.showMessageDialog(this, "Невозможно зарегестрировать данного пользователя", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Пользователь зарегестрирован", "Информация", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_registationButtonActionPerformed
 
     /**

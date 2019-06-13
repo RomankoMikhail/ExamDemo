@@ -106,7 +106,38 @@ public class RegistationDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private boolean ready = false;
+    
+    public boolean isReady() {
+        return ready;
+    }
+    
+    public String getUsername() {
+        return usernameField.getText().trim();
+    }
+    
+    public String getPassword() {
+        return passwordField.getText().trim();
+    }
+    
+    public String getFullname() {
+        return fullnameField.getText().trim();
+    }
+    
+    
+    public void setUsername(String username) {
+        usernameField.setText(username);
+    }
+    
+    public void setPassword(String password) {
+        passwordField.setText(password);
+    }
+    
+    public void setFullname(String fullname) {
+        fullnameField.setText(fullname);
+    }
+    
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         setVisible(false);
         dispose();
@@ -160,12 +191,8 @@ public class RegistationDialog extends javax.swing.JDialog {
         }
         
         if(isLengthCorrect && haveDigit && haveSpecialSymbol && haveUppercase) {
-            if(!Database.execute("INSERT INTO users (fullname, username, password, type) VALUES('" + fullname + "', '" + username + "', '" + password + "', 1);")) {
-                JOptionPane.showMessageDialog(this, "Невозможно зарегестрировать данного пользователя", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            ready = true;
             
-            JOptionPane.showMessageDialog(this, "Пользователь зарегестрирован", "Информация", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
             dispose();
         } else {
