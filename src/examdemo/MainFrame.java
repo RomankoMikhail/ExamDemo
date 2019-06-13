@@ -63,6 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
         addUserButton = new javax.swing.JButton();
         deleteUserButton = new javax.swing.JButton();
         editUserButton = new javax.swing.JButton();
+        chageUserTypeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,6 +112,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        chageUserTypeButton.setText("Изменить тип пользователя");
+        chageUserTypeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chageUserTypeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,12 +127,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                    .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(addUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteUserButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chageUserTypeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -140,7 +149,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(editUserButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteUserButton)
-                .addGap(69, 69, 69))
+                .addGap(35, 35, 35)
+                .addComponent(chageUserTypeButton)
+                .addContainerGap())
         );
 
         pack();
@@ -213,6 +224,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteUserButtonActionPerformed
 
+    private void chageUserTypeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chageUserTypeButtonActionPerformed
+        DemoFrame frame = new DemoFrame();
+        frame.setVisible(true);
+    }//GEN-LAST:event_chageUserTypeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,6 +266,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addUserButton;
+    private javax.swing.JButton chageUserTypeButton;
     private javax.swing.JButton deleteUserButton;
     private javax.swing.JButton editUserButton;
     private javax.swing.JLabel jLabel1;
