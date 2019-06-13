@@ -36,13 +36,14 @@ public class MainFrame extends javax.swing.JFrame {
         
         
         DefaultTableModel model = new DefaultTableModel();
+        
         model.addColumn("ID");
         model.addColumn("Имя пользователя");
         model.addColumn("ФИО");
         model.addColumn("Тип пользователя");
         
-        
         usersTable.setModel(model);
+        usersTable.setDefaultEditor(Object.class, null);
         updateTable();
     }
     
@@ -86,6 +87,7 @@ public class MainFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        usersTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(usersTable);
 
         addUserButton.setText("Добавить пользователя");
